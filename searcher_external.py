@@ -25,7 +25,7 @@ class SearcherExternal:
             (score, imageName) = results[j]
             path = os.path.join(self.dataset, imageName)
             result = cv2.imread(path)
-            result = cv2.resize(result, (300,300))
+            #result = cv2.resize(result, (300,300))
             print("\t{}. {} : {:.3f}".format(j + 1, imageName, score))
             # vérifier si le premier montage doit être utilisé
             if j < 5:

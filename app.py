@@ -20,8 +20,8 @@ def upload_file():
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
         query = f'{UPLOAD_FOLDER}/{filename}'
-        print(sc.search(query))
-        return redirect("/") 
+        similar_pic = sc.search(query)
+        return render_template('result.html', messages= similar_pic, len = len(similar_pic))
 
 
 if __name__ == "__main__":
