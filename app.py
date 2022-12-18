@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from werkzeug.utils import secure_filename 
 import os
+from searcher_external import SearcherExternal
 
 UPLOAD_FOLDER = 'static/upload'
 
@@ -14,9 +15,12 @@ def index():
 @app.route('/upload',methods= ['GET','POST'])
 def upload_file():
     if request.method == 'POST':
+        sc = SearcherExternal()
         f = request.files['file']
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        query = f'{UPLOAD_FOLDER}/{filename}'
+        print(sc.search(query))
         return redirect("/") 
 
 
